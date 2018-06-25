@@ -51,11 +51,13 @@ srcdir = joinpath(BinDeps.depsdir(libclp),"src",cbcname)
 
 provides(SimpleBuild,
     (@build_steps begin
-        GetSources(libclp)
-        @build_steps begin
-            ChangeDirectory(srcdir)
-            `./configure --prefix=$prefix --without-blas --without-lapack --enable-cbc-parallel`
-            `make install`
+        if length(BinDeps._find_library(libclp)) == 0 || length(BinDeps._find_library(libcbcsolver)) == 0
+            GetSources(libclp)
+            @build_steps begin
+                ChangeDirectory(srcdir)
+                `./configure --prefix=$prefix --without-blas --without-lapack --enable-cbc-parallel`
+                `make install`
+            end
         end
     end),[libclp,libcbcsolver], os = :Unix)
 
