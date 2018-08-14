@@ -1,7 +1,10 @@
 using BinDeps
 
 import Compat: Sys
-import Libdl
+
+if VERSION >= v"0.7-"
+    import Libdl
+end
 
 @BinDeps.setup
 
