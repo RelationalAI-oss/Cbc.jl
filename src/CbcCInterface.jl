@@ -1,5 +1,7 @@
 module CbcCInterface
 
+using Compat: Nothing
+
 import ..Cbc
 
 export CbcModel,
