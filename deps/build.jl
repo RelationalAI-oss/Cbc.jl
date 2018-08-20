@@ -1,4 +1,5 @@
 using BinDeps
+import Compat.Sys
 
 import Compat: Sys
 
